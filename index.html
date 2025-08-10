@@ -166,148 +166,161 @@
                 <div class="p-6 md:p-8 bg-gradient-to-r from-[#00A1E4] to-[#0084B4] text-white">
                     <h2 class="text-3xl font-bold">✨ AI 환자 맞춤 임상 지원 도구</h2>
                 </div>
-                <div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Feature 1: Patient Handout -->
-                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                        <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
-                            <span class="text-2xl mr-2">📄</span> AI 환자 교육자료
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label for="diagnosis-select" class="block text-sm font-medium text-slate-700">1. 진단명 선택</label>
-                                <select id="diagnosis-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-[#00A1E4] focus:border-[#00A1E4] sm:text-sm rounded-md">
-                                    <option>심근경색증 후 (Post-MI)</option>
-                                    <option>관상동맥우회술 후 (Post-CABG)</option>
-                                    <option>안정형 협심증 (Stable Angina)</option>
-                                    <option>만성 심부전 (Chronic Heart Failure)</option>
-                                    <option>말초동맥질환 (PVD)</option>
-                                    <option>만성폐쇄성폐질환 (COPD)</option>
-                                    <option>천식 (Asthma)</option>
-                                    <option>폐섬유증 (Pulmonary Fibrosis)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="topic-input" class="block text-sm font-medium text-slate-700">2. 교육 주제 입력</label>
-                                <input type="text" id="topic-input" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="예: 에너지 보존 전략">
-                            </div>
-                            <button id="generate-handout-btn" class="ai-button w-full bg-[#0084B4] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#005B7F] flex items-center justify-center gap-2">
-                                ✨ <span>교육자료 생성</span>
-                            </button>
+                <div class="p-6 md:p-8">
+                    <!-- NEW: API Key Input Section -->
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg mb-8">
+                        <h3 class="font-bold text-lg text-blue-800 mb-2">API 키 설정</h3>
+                        <p class="text-sm text-blue-700 mb-3">AI 기능을 사용하려면 Google AI Studio에서 발급받은 API 키가 필요합니다. 키는 브라우저에만 저장되며 외부로 전송되지 않습니다.</p>
+                        <div class="flex items-center gap-2">
+                            <input type="password" id="api-key-input" class="flex-grow border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="여기에 API 키를 붙여넣으세요">
+                            <button id="save-api-key-btn" class="ai-button bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600">키 저장</button>
                         </div>
-                        <div id="handout-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
+                         <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-xs text-blue-600 hover:underline mt-2 inline-block">Google AI Studio에서 API 키 받기 &rarr;</a>
                     </div>
-                    <!-- Feature 2: Exercise Prescription -->
-                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                        <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
-                            <span class="text-2xl mr-2">🏋️</span> AI 운동처방 추천
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label for="prog-diagnosis-select" class="block text-sm font-medium text-slate-700">1. 진단명</label>
-                                <select id="prog-diagnosis-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-[#00A1E4] focus:border-[#00A1E4] sm:text-sm rounded-md">
-                                    <option>심근경색증 후 (Post-MI)</option>
-                                    <option>관상동맥우회술 후 (Post-CABG)</option>
-                                    <option>안정형 협심증 (Stable Angina)</option>
-                                    <option>만성 심부전 (Chronic Heart Failure)</option>
-                                    <option>말초동맥질환 (PVD)</option>
-                                    <option>만성폐쇄성폐질환 (COPD)</option>
-                                    <option>천식 (Asthma)</option>
-                                    <option>폐섬유증 (Pulmonary Fibrosis)</option>
-                                </select>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Feature 1: Patient Handout -->
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
+                                <span class="text-2xl mr-2">📄</span> AI 환자 교육자료
+                            </h3>
+                            <div class="space-y-4">
                                 <div>
-                                    <label for="current-level-input" class="block text-sm font-medium text-slate-700">2. 현재 METs</label>
-                                    <input type="number" id="current-level-input" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" value="3">
+                                    <label for="diagnosis-select" class="block text-sm font-medium text-slate-700">1. 진단명 선택</label>
+                                    <select id="diagnosis-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-[#00A1E4] focus:border-[#00A1E4] sm:text-sm rounded-md">
+                                        <option>심근경색증 후 (Post-MI)</option>
+                                        <option>관상동맥우회술 후 (Post-CABG)</option>
+                                        <option>안정형 협심증 (Stable Angina)</option>
+                                        <option>만성 심부전 (Chronic Heart Failure)</option>
+                                        <option>말초동맥질환 (PVD)</option>
+                                        <option>만성폐쇄성폐질환 (COPD)</option>
+                                        <option>천식 (Asthma)</option>
+                                        <option>폐섬유증 (Pulmonary Fibrosis)</option>
+                                    </select>
                                 </div>
                                 <div>
-                                    <label for="last-rpe-input" class="block text-sm font-medium text-slate-700">3. 지난 세션 RPE</label>
-                                    <input type="number" id="last-rpe-input" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" value="12" min="6" max="20">
+                                    <label for="topic-input" class="block text-sm font-medium text-slate-700">2. 교육 주제 입력</label>
+                                    <input type="text" id="topic-input" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="예: 에너지 보존 전략">
                                 </div>
+                                <button id="generate-handout-btn" class="ai-button w-full bg-[#0084B4] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#005B7F] flex items-center justify-center gap-2">
+                                    ✨ <span>교육자료 생성</span>
+                                </button>
                             </div>
-                            <button id="suggest-progression-btn" class="ai-button w-full bg-[#00A1E4] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#0084B4] flex items-center justify-center gap-2">
-                                ✨ <span>맞춤 운동처방 추천</span>
-                            </button>
+                            <div id="handout-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
                         </div>
-                        <div id="progression-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
-                    </div>
-                    <!-- Feature 3: Postural Drainage -->
-                     <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                        <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
-                            <span class="text-2xl mr-2">🧘</span> AI 체위배담법 추천
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label for="pd-segment-select" class="block text-sm font-medium text-slate-700">1. 목표 폐 구역 선택</label>
-                                <select id="pd-segment-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-[#00A1E4] focus:border-[#00A1E4] sm:text-sm rounded-md">
-                                    <option>오른위엽 꼭대기구역</option>
-                                    <option>오른위엽 뒤구역</option>
-                                    <option>오른위엽 앞구역</option>
-                                    <option>오른중간엽</option>
-                                    <option>오른아래엽 위구역</option>
-                                    <option>오른아래엽 앞바닥구역</option>
-                                    <option>오른아래엽 가쪽바닥구역</option>
-                                    <option>오른아래엽 뒤바닥구역</option>
-                                    <option>왼위엽 꼭대기뒤구역</option>
-                                    <option>왼위엽 앞구역</option>
-                                    <option>왼위엽 혀구역</option>
-                                    <option>왼아래엽 위구역</option>
-                                    <option>왼아래엽 앞안쪽바닥구역</option>
-                                    <option>왼아래엽 가쪽바닥구역</option>
-                                    <option>왼아래엽 뒤바닥구역</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="pd-conditions-input" class="block text-sm font-medium text-slate-700">2. 환자 특이사항 (금기증 고려)</label>
-                                <input type="text" id="pd-conditions-input" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="예: 두개내압 상승, 불안정 협심증">
-                            </div>
-                            <button id="suggest-pd-btn" class="ai-button w-full bg-[#003C52] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#005B7F] flex items-center justify-center gap-2">
-                                ✨ <span>자세 추천받기</span>
-                            </button>
-                        </div>
-                        <div id="pd-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
-                    </div>
-                    <!-- NEW Feature 4: Case Analyzer -->
-                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                        <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
-                            <span class="text-2xl mr-2">🧐</span> AI 임상 사례 분석
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label for="case-summary-input" class="block text-sm font-medium text-slate-700">1. 환자 사례 요약 (익명화)</label>
-                                <textarea id="case-summary-input" rows="4" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="예: 65세 남성, COPD 진단 5년차, 6MWT 300m, 주 호소는 계단 2층 오를 때 발생하는 호흡곤란(Borg 척도 5/10)"></textarea>
-                            </div>
-                            <button id="analyze-case-btn" class="ai-button w-full bg-[#0084B4] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#005B7F] flex items-center justify-center gap-2">
-                                ✨ <span>사례 분석하기</span>
-                            </button>
-                        </div>
-                        <div id="case-analysis-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
-                    </div>
-                    <!-- NEW Feature 5: ABGA Interpreter -->
-                    <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                        <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
-                            <span class="text-2xl mr-2">🩸</span> AI ABGA 해석기
-                        </h3>
-                        <div class="space-y-4">
-                            <div class="grid grid-cols-3 gap-2">
+                        <!-- Feature 2: Exercise Prescription -->
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
+                                <span class="text-2xl mr-2">🏋️</span> AI 운동처방 추천
+                            </h3>
+                            <div class="space-y-4">
                                 <div>
-                                    <label for="abga-ph" class="block text-xs font-medium text-slate-700">pH</label>
-                                    <input type="number" id="abga-ph" step="0.01" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="7.35">
+                                    <label for="prog-diagnosis-select" class="block text-sm font-medium text-slate-700">1. 진단명</label>
+                                    <select id="prog-diagnosis-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-[#00A1E4] focus:border-[#00A1E4] sm:text-sm rounded-md">
+                                        <option>심근경색증 후 (Post-MI)</option>
+                                        <option>관상동맥우회술 후 (Post-CABG)</option>
+                                        <option>안정형 협심증 (Stable Angina)</option>
+                                        <option>만성 심부전 (Chronic Heart Failure)</option>
+                                        <option>말초동맥질환 (PVD)</option>
+                                        <option>만성폐쇄성폐질환 (COPD)</option>
+                                        <option>천식 (Asthma)</option>
+                                        <option>폐섬유증 (Pulmonary Fibrosis)</option>
+                                    </select>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="current-level-input" class="block text-sm font-medium text-slate-700">2. 현재 METs</label>
+                                        <input type="number" id="current-level-input" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" value="3">
+                                    </div>
+                                    <div>
+                                        <label for="last-rpe-input" class="block text-sm font-medium text-slate-700">3. 지난 세션 RPE</label>
+                                        <input type="number" id="last-rpe-input" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" value="12" min="6" max="20">
+                                    </div>
+                                </div>
+                                <button id="suggest-progression-btn" class="ai-button w-full bg-[#00A1E4] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#0084B4] flex items-center justify-center gap-2">
+                                    ✨ <span>맞춤 운동처방 추천</span>
+                                </button>
+                            </div>
+                            <div id="progression-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
+                        </div>
+                        <!-- Feature 3: Postural Drainage -->
+                         <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
+                                <span class="text-2xl mr-2">🧘</span> AI 체위배담법 추천
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="pd-segment-select" class="block text-sm font-medium text-slate-700">1. 목표 폐 구역 선택</label>
+                                    <select id="pd-segment-select" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-[#00A1E4] focus:border-[#00A1E4] sm:text-sm rounded-md">
+                                        <option>오른위엽 꼭대기구역</option>
+                                        <option>오른위엽 뒤구역</option>
+                                        <option>오른위엽 앞구역</option>
+                                        <option>오른중간엽</option>
+                                        <option>오른아래엽 위구역</option>
+                                        <option>오른아래엽 앞바닥구역</option>
+                                        <option>오른아래엽 가쪽바닥구역</option>
+                                        <option>오른아래엽 뒤바닥구역</option>
+                                        <option>왼위엽 꼭대기뒤구역</option>
+                                        <option>왼위엽 앞구역</option>
+                                        <option>왼위엽 혀구역</option>
+                                        <option>왼아래엽 위구역</option>
+                                        <option>왼아래엽 앞안쪽바닥구역</option>
+                                        <option>왼아래엽 가쪽바닥구역</option>
+                                        <option>왼아래엽 뒤바닥구역</option>
+                                    </select>
                                 </div>
                                 <div>
-                                    <label for="abga-paco2" class="block text-xs font-medium text-slate-700">PaCO₂</label>
-                                    <input type="number" id="abga-paco2" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="40">
+                                    <label for="pd-conditions-input" class="block text-sm font-medium text-slate-700">2. 환자 특이사항 (금기증 고려)</label>
+                                    <input type="text" id="pd-conditions-input" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="예: 두개내압 상승, 불안정 협심증">
                                 </div>
-                                <div>
-                                    <label for="abga-hco3" class="block text-xs font-medium text-slate-700">HCO₃⁻</label>
-                                    <input type="number" id="abga-hco3" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="24">
-                                </div>
+                                <button id="suggest-pd-btn" class="ai-button w-full bg-[#003C52] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#005B7F] flex items-center justify-center gap-2">
+                                    ✨ <span>자세 추천받기</span>
+                                </button>
                             </div>
-                            <button id="interpret-abga-btn" class="ai-button w-full bg-[#00A1E4] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#0084B4] flex items-center justify-center gap-2">
-                                ✨ <span>ABGA 결과 해석</span>
-                            </button>
+                            <div id="pd-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
                         </div>
-                        <div id="abga-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
+                        <!-- NEW Feature 4: Case Analyzer -->
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
+                                <span class="text-2xl mr-2">🧐</span> AI 임상 사례 분석
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="case-summary-input" class="block text-sm font-medium text-slate-700">1. 환자 사례 요약 (익명화)</label>
+                                    <textarea id="case-summary-input" rows="4" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="예: 65세 남성, COPD 진단 5년차, 6MWT 300m, 주 호소는 계단 2층 오를 때 발생하는 호흡곤란(Borg 척도 5/10)"></textarea>
+                                </div>
+                                <button id="analyze-case-btn" class="ai-button w-full bg-[#0084B4] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#005B7F] flex items-center justify-center gap-2">
+                                    ✨ <span>사례 분석하기</span>
+                                </button>
+                            </div>
+                            <div id="case-analysis-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
+                        </div>
+                        <!-- NEW Feature 5: ABGA Interpreter -->
+                        <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                            <h3 class="font-bold text-xl text-[#003C52] mb-4 flex items-center">
+                                <span class="text-2xl mr-2">🩸</span> AI ABGA 해석기
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div>
+                                        <label for="abga-ph" class="block text-xs font-medium text-slate-700">pH</label>
+                                        <input type="number" id="abga-ph" step="0.01" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="7.35">
+                                    </div>
+                                    <div>
+                                        <label for="abga-paco2" class="block text-xs font-medium text-slate-700">PaCO₂</label>
+                                        <input type="number" id="abga-paco2" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="40">
+                                    </div>
+                                    <div>
+                                        <label for="abga-hco3" class="block text-xs font-medium text-slate-700">HCO₃⁻</label>
+                                        <input type="number" id="abga-hco3" class="mt-1 block w-full border border-slate-300 rounded-md shadow-sm py-2 px-3" placeholder="24">
+                                    </div>
+                                </div>
+                                <button id="interpret-abga-btn" class="ai-button w-full bg-[#00A1E4] text-white font-bold py-2 px-4 rounded-lg hover:bg-[#0084B4] flex items-center justify-center gap-2">
+                                    ✨ <span>ABGA 결과 해석</span>
+                                </button>
+                            </div>
+                            <div id="abga-result" class="mt-4 p-4 bg-white rounded-md border border-slate-200 text-sm whitespace-pre-wrap min-h-[100px]"></div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -339,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 10, theme: 'management', title: '질환 IV: 심부전 및 심장 수술 후 관리', icon: '❤️‍🩹', summary: '심부전(HF)의 종류와 증상, 심장 수술 후 흉골 주의사항을 배웁니다.' },
         { id: 11, theme: 'rehab', title: '심장 재활', icon: '❤️‍🔥', summary: '심장질환 환자의 회복을 돕는 단계별 재활 프로그램을 FITT-VP 원칙에 따라 이해합니다.' },
         { id: 12, theme: 'rehab', title: '폐 재활', icon: '🚶‍♂️', summary: '만성 호흡기 질환 환자의 호흡곤란 악순환을 끊는 재활법을 배웁니다.' },
-        { id: 13, theme: 'rehab', title: '중환자실(ICU) 물리치료', icon: '�', summary: 'ICU 환경에서의 조기 재활 프로토콜과 안전 수칙을 학습합니다.' },
+        { id: 13, theme: 'rehab', title: '중환자실(ICU) 물리치료', icon: '🛌', summary: 'ICU 환경에서의 조기 재활 프로토콜과 안전 수칙을 학습합니다.' },
         { id: 14, theme: 'rehab', title: '특수 환자군 관리 및 증례 연구', icon: '👶👵💝', summary: '소아, 노인, 이식 환자 등 특수 케이스와 통합 증례를 다룹니다.' }
     ];
 
@@ -834,8 +847,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const alertModal = document.getElementById('alert-modal');
     const alertMessage = document.getElementById('alert-message');
     const alertCloseBtn = document.getElementById('alert-close-btn');
-    const apiKey = ""; 
+    const apiKeyInput = document.getElementById('api-key-input');
+    const saveApiKeyBtn = document.getElementById('save-api-key-btn');
+    let userApiKey = localStorage.getItem('geminiApiKey');
     const ttsPlayer = new Audio();
+
+    if (userApiKey) {
+        apiKeyInput.value = userApiKey;
+    }
+
+    saveApiKeyBtn.addEventListener('click', () => {
+        const key = apiKeyInput.value.trim();
+        if (key) {
+            localStorage.setItem('geminiApiKey', key);
+            userApiKey = key;
+            showAlert('API 키가 성공적으로 저장되었습니다.');
+        } else {
+            localStorage.removeItem('geminiApiKey');
+            userApiKey = null;
+            showAlert('API 키가 제거되었습니다.');
+        }
+    });
 
     const showLoading = () => {
         loadingModal.classList.remove('hidden');
@@ -859,10 +891,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function callGeminiAPI(apiUrl, payload, maxRetries = 3) {
+        if (!userApiKey) {
+            showAlert('AI 기능을 사용하려면 먼저 API 키를 저장해주세요.');
+            throw new Error('API key is not set.');
+        }
+        
+        const fullApiUrl = `${apiUrl}?key=${userApiKey}`;
         let attempt = 0;
         while (attempt < maxRetries) {
             try {
-                const response = await fetch(apiUrl, {
+                const response = await fetch(fullApiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -891,7 +929,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const prompt = `선택된 진단명: ${diagnosis}, 교육 주제: ${topic}에 대해 환자가 이해하기 쉽도록 간단하고 친절한 어조로 교육자료를 작성해줘. 물리치료사로서 환자에게 설명하는 것처럼, 긍정적이고 격려하는 내용을 포함해줘. 내용은 3-4개의 짧은 단락으로 구성하고, 각 단락 앞에 이모지를 붙여줘.`;
         const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
 
         showLoading();
         resultDiv.textContent = 'AI가 교육자료를 생성 중입니다...';
@@ -900,7 +938,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = result.candidates[0].content.parts[0].text;
             resultDiv.textContent = text;
         } catch (error) {
-            resultDiv.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            resultDiv.textContent = '오류가 발생했습니다. API 키를 확인하거나 잠시 후 다시 시도해주세요.';
         } finally {
             hideLoading();
         }
@@ -915,7 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const prompt = `당신은 심장호흡물리치료 전문가입니다. 다음 환자 정보에 기반하여 다음 주 운동 세션을 위한 구체적인 운동처방(FITT-VP 원칙)을 추천해주세요. 추천 내용은 유산소 운동, 저항 운동, 유연성 운동을 모두 포함하고, 각 항목에 대한 구체적인 지침과 그 이유를 전문가 수준으로 상세히 설명해주세요. 결과는 마크다운 형식을 사용하여 명확하게 구분해주세요. 환자 정보: 진단명=${diagnosis}, 현재 운동 수준=${level} METs, 지난 세션 운동자각도(RPE 6-20)=${rpe}.`;
         const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
 
         showLoading();
         resultDiv.textContent = 'AI가 운동처방을 분석 중입니다...';
@@ -924,7 +962,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = result.candidates[0].content.parts[0].text;
             resultDiv.textContent = text;
         } catch (error) {
-            resultDiv.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            resultDiv.textContent = '오류가 발생했습니다. API 키를 확인하거나 잠시 후 다시 시도해주세요.';
         } finally {
             hideLoading();
         }
@@ -942,7 +980,7 @@ document.addEventListener('DOMContentLoaded', () => {
 3.  **타진/진동 적용 부위:** (해부학적 위치를 명확히 설명)
 4.  **주의사항 및 금기:** (입력된 환자 특이사항을 고려하여 특히 강조할 점 포함)`;
         const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
 
         showLoading();
         resultDiv.textContent = 'AI가 최적의 자세를 분석 중입니다...';
@@ -951,7 +989,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = result.candidates[0].content.parts[0].text;
             resultDiv.textContent = text;
         } catch (error) {
-            resultDiv.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            resultDiv.textContent = '오류가 발생했습니다. API 키를 확인하거나 잠시 후 다시 시도해주세요.';
         } finally {
             hideLoading();
         }
@@ -969,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const prompt = `당신은 숙련된 심장호흡물리치료사입니다. 다음 환자 사례를 ICF 모델(기능, 장애, 건강의 국제 분류)에 기반하여 분석해주세요. 신체 기능 및 구조, 활동, 참여 수준에서 주요 문제점을 식별하고, 이를 바탕으로 한 물리치료 평가 계획과 중재 목표를 제시해주세요. 결과는 명확한 마크다운 형식을 사용해주세요.\n\n사례: "${caseSummary}"`;
         const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
 
         showLoading();
         resultDiv.textContent = 'AI가 임상 사례를 분석 중입니다...';
@@ -978,7 +1016,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = result.candidates[0].content.parts[0].text;
             resultDiv.textContent = text;
         } catch (error) {
-            resultDiv.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            resultDiv.textContent = '오류가 발생했습니다. API 키를 확인하거나 잠시 후 다시 시도해주세요.';
         } finally {
             hideLoading();
         }
@@ -998,7 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const prompt = `당신은 ABGA(동맥혈 가스 분석) 해석 전문가입니다. pH=${ph}, PaCO₂=${paco2} mmHg, HCO₃⁻=${hco3} mEq/L 값을 바탕으로 산-염기 불균형 상태를 단계별로 해석해주세요. 다음 4단계에 따라 명확하게 설명해주세요:\n1. 산증(Acidosis) 또는 알칼리증(Alkalosis) 여부 판단.\n2. 호흡성(Respiratory) 또는 대사성(Metabolic) 원인 규명.\n3. 보상(Compensation) 작용 여부 확인 (무보상, 부분보상, 완전보상).\n4. 종합적인 해석 및 물리치료적 고려사항 제시.`;
         const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent`;
 
         showLoading();
         resultDiv.textContent = 'AI가 ABGA 결과를 해석 중입니다...';
@@ -1007,7 +1045,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = result.candidates[0].content.parts[0].text;
             resultDiv.textContent = text;
         } catch (error) {
-            resultDiv.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+            resultDiv.textContent = '오류가 발생했습니다. API 키를 확인하거나 잠시 후 다시 시도해주세요.';
         } finally {
             hideLoading();
         }
@@ -1076,7 +1114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 model: "gemini-2.5-flash-preview-tts"
             };
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent`;
 
             showLoading();
             try {
@@ -1103,7 +1141,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 console.error("TTS Error:", error);
-                showAlert('음성 변환 중 오류가 발생했습니다.');
+                showAlert('음성 변환 중 오류가 발생했습니다. API 키를 확인해주세요.');
             } finally {
                 hideLoading();
             }
@@ -1113,4 +1151,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-�
