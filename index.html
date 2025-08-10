@@ -381,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <h4 class="text-lg font-bold mb-4 text-[#003C52]">Lecture 1 핵심 요약</h4>
                 <ul class="space-y-3 text-left text-sm">
                     <li><strong class="text-[#005B7F]">💡 핵심 개념:</strong> 산소 전달 경로 (Oxygen Transport Pathway) - 우리 몸의 모든 세포에 산소를 공급하는 과정. 물리치료는 이 경로의 효율을 높이는 것!</li>
-                    <li><strong class="text-[#005B7F]">🫀 심장의 구조:</strong> 4개의 방, 4개의 판막. 혈액 흐름: 전신 → 우심방/실 → 폐 → 좌심방/실 → 전신</li>
+                    <li><strong class="text-[#005B7F]">� 심장의 구조:</strong> 4개의 방, 4개의 판막. 혈액 흐름: 전신 → 우심방/실 → 폐 → 좌심방/실 → 전신</li>
                     <li><strong class="text-[#005B7F]">⚡ 전기 시스템:</strong> 동방결절(SA node, Sinoatrial node)에서 시작하여 심장을 규칙적으로 뛰게 함.</li>
                 </ul>
                 <div class="chart-container h-64 mt-4">
@@ -1160,7 +1160,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 console.error("TTS Error:", error);
-                showAlert('음성 변환 중 오류가 발생했습니다. API 키를 확인해주세요.');
+                // The callGeminiAPI function already shows an alert if the key is missing.
+                // Only show a generic error for other types of failures.
+                if (error.message !== 'API key is not set.') {
+                    showAlert('음성 변환 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                }
             } finally {
                 hideLoading();
             }
@@ -1170,3 +1174,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+�
